@@ -1,5 +1,8 @@
 package com.sudjoao.vehicles_fipe.enums;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum FIPEVehiclesCategories {
     CAR(1, "carros"),
     MOTORCYCLE(2, "motos"),
@@ -13,7 +16,7 @@ public enum FIPEVehiclesCategories {
         this.endpoint = endpoint;
     }
 
-    public int getOption(){
+    public int getOption() {
         return option;
     }
 
@@ -21,12 +24,21 @@ public enum FIPEVehiclesCategories {
         return endpoint;
     }
 
-    public static String getDescriptionByOption(int option) {
+    public static FIPEVehiclesCategories getByOption(int option) {
         for (FIPEVehiclesCategories type : FIPEVehiclesCategories.values()) {
             if (option == type.option) {
-                return type.getEndpoint();
+                return type;
             }
         }
         throw new IllegalArgumentException("Cant find the vehicle option: " + option);
+    }
+
+    public static List<FIPEVehiclesCategories> getAllOptions() {
+        return Arrays.stream(FIPEVehiclesCategories.values()).toList();
+    }
+
+    @Override
+    public String toString() {
+        return "%d - %s".formatted(option, endpoint.toUpperCase());
     }
 }
