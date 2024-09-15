@@ -16,7 +16,9 @@ public class VehiclesFIPEApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         FIPEApiService fipeApiService = new FIPEApiService();
-        System.out.println(fipeApiService.getByVehicleType(FIPEVehiclesCategories.CAR.getOption()));
-        System.out.println(fipeApiService.getByVehicleType(FIPEVehiclesCategories.MOTORCYCLE.getOption()));
+        System.out.println(fipeApiService.getByVehicleType(FIPEVehiclesCategories.CAR));
+        System.out.println(fipeApiService.getByBrand(FIPEVehiclesCategories.CAR, 1));
+        System.out.println(fipeApiService.getYearsByModel(FIPEVehiclesCategories.CAR, 1, 1));
+        System.out.println(fipeApiService.getVehicleFullInformation(FIPEVehiclesCategories.CAR, 1, 1, "1992-1"));
     }
 }
