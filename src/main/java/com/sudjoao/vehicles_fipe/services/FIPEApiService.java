@@ -8,16 +8,17 @@ import java.util.List;
 public class FIPEApiService extends ApiService {
     private final static String apiUrl = "https://parallelum.com.br/fipe/api/v1";
 
-    public <T extends Vehicle> List<Vehicle> getByBrand(Class<T> vehicleClass) {
-        String type = vehicleEndpoint(vehicleClass);
+    public List<Vehicle> getByVehicleType(int option) {
+        String type = vehicleEndpoint(option);
         String url = "%s/%s/marcas".formatted(apiUrl, type);
         var response = get(url);
-        System.out.println(response.body());
-        return null;
+
+        return MapperService.toObjectList(response.body(), Vehicle.class);
     }
 
-    public <T extends Vehicle> String vehicleEndpoint(Class<T> vehicleClass) {
-        return FIPEVehiclesCategories.getDescriptionByClass(vehicleClass);
+
+    public <T extends Vehicle> String vehicleEndpoint(int option) {
+        return FIPEVehiclesCategories.getDescriptionByOption(option);
     }
 
 }

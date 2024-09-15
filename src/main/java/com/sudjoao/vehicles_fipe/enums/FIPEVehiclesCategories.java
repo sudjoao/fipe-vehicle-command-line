@@ -1,36 +1,32 @@
 package com.sudjoao.vehicles_fipe.enums;
 
-import com.sudjoao.vehicles_fipe.models.CarDTO;
-import com.sudjoao.vehicles_fipe.models.MotorcycleDTO;
-import com.sudjoao.vehicles_fipe.models.TruckDTO;
-
 public enum FIPEVehiclesCategories {
-    CAR(CarDTO.class, "carros"),
-    MOTORCYCLE(MotorcycleDTO.class, "motos"),
-    TRUCK(TruckDTO.class, "caminhoes");
+    CAR(1, "carros"),
+    MOTORCYCLE(2, "motos"),
+    TRUCK(3, "caminhoes");
 
-    private final Class<?> vehicleClass;
+    private final int option;
     private final String endpoint;
 
-    FIPEVehiclesCategories(Class<?> vehicleClass, String endpoint) {
-        this.vehicleClass = vehicleClass;
+    FIPEVehiclesCategories(int option, String endpoint) {
+        this.option = option;
         this.endpoint = endpoint;
     }
 
-    public Class<?> getVehicleClass() {
-        return vehicleClass;
+    public int getOption(){
+        return option;
     }
 
     public String getEndpoint() {
         return endpoint;
     }
 
-    public static String getDescriptionByClass(Class<?> vehicleClass) {
+    public static String getDescriptionByOption(int option) {
         for (FIPEVehiclesCategories type : FIPEVehiclesCategories.values()) {
-            if (type.getVehicleClass().equals(vehicleClass)) {
+            if (option == type.option) {
                 return type.getEndpoint();
             }
         }
-        throw new IllegalArgumentException("Cant find the vehicle type: " + vehicleClass.getName());
+        throw new IllegalArgumentException("Cant find the vehicle option: " + option);
     }
 }

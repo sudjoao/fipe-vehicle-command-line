@@ -1,9 +1,6 @@
 package com.sudjoao.vehicles_fipe;
 
-import com.sudjoao.vehicles_fipe.models.CarDTO;
-import com.sudjoao.vehicles_fipe.models.MotorcycleDTO;
-import com.sudjoao.vehicles_fipe.models.Vehicle;
-import com.sudjoao.vehicles_fipe.services.ApiService;
+import com.sudjoao.vehicles_fipe.enums.FIPEVehiclesCategories;
 import com.sudjoao.vehicles_fipe.services.FIPEApiService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +16,7 @@ public class VehiclesFIPEApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         FIPEApiService fipeApiService = new FIPEApiService();
-        fipeApiService.getByBrand(CarDTO.class);
-        fipeApiService.getByBrand(MotorcycleDTO.class);
+        System.out.println(fipeApiService.getByVehicleType(FIPEVehiclesCategories.CAR.getOption()));
+        System.out.println(fipeApiService.getByVehicleType(FIPEVehiclesCategories.MOTORCYCLE.getOption()));
     }
 }
