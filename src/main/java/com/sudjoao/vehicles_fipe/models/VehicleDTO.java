@@ -2,9 +2,12 @@ package com.sudjoao.vehicles_fipe.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record VehicleDTO(@JsonProperty("codigo") String codigo, @JsonProperty("nome") String nome) {
+public record VehicleDTO(
+        @JsonProperty("codigo") String code,
+        @JsonProperty("nome") String name
+) {
     @Override
     public String toString() {
-        return "Code %s - %s".formatted(codigo, nome);
+        return String.format("Vehicle: %s (Code: %s)", name, code);
     }
 }

@@ -1,14 +1,12 @@
 package com.sudjoao.vehicles_fipe;
 
 import com.sudjoao.vehicles_fipe.enums.FIPEVehiclesCategories;
-import com.sudjoao.vehicles_fipe.models.VehicleDTO;
 import com.sudjoao.vehicles_fipe.services.FIPEApiService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class VehiclesFIPEApplication implements CommandLineRunner {
@@ -28,11 +26,11 @@ public class VehiclesFIPEApplication implements CommandLineRunner {
         fipeApiService.getByVehicleType(vehicleOption).forEach(System.out::println);
         System.out.println("Type the code that you want to verify the models:");
         var vehicleBrand = scanner.nextInt();
-        fipeApiService.getByBrand(vehicleOption, vehicleBrand).modelos().forEach(System.out::println);
+        fipeApiService.getByBrand(vehicleOption, vehicleBrand).models().forEach(System.out::println);
         System.out.println("Type the code that you want to verify the prices");
         var vehicleModel = scanner.nextInt();
         var vehicleYears = fipeApiService.getYearsByModel(vehicleOption, vehicleBrand, vehicleModel);
-        var vehicles = vehicleYears.stream().map(v -> fipeApiService.getVehicleFullInformation(vehicleOption, vehicleBrand, vehicleModel, v.codigo())).collect(Collectors.toList());
+        var vehicles = vehicleYears.stream().map(v -> fipeApiService.getVehicleFullInformation(vehicleOption, vehicleBrand, vehicleModel, v.code())).toList();
         vehicles.forEach(System.out::println);
     }
 }
