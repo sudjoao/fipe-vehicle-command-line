@@ -1,11 +1,9 @@
 package com.sudjoao.vehicles_fipe.services;
 
-import com.sudjoao.vehicles_fipe.models.CarDTO;
-import com.sudjoao.vehicles_fipe.models.MotorcycleDTO;
+import com.sudjoao.vehicles_fipe.enums.FIPEVehiclesCategories;
 import com.sudjoao.vehicles_fipe.models.Vehicle;
 
 import java.util.List;
-import java.util.Map;
 
 public class FIPEApiService extends ApiService {
     private final static String apiUrl = "https://parallelum.com.br/fipe/api/v1";
@@ -19,12 +17,7 @@ public class FIPEApiService extends ApiService {
     }
 
     public <T extends Vehicle> String vehicleEndpoint(Class<T> vehicleClass) {
-        if (vehicleClass.equals(CarDTO.class)) {
-            return "carros";
-        } else if (vehicleClass.equals(MotorcycleDTO.class)) {
-            return "motos";
-        }
-        return null;
+        return FIPEVehiclesCategories.getDescriptionByClass(vehicleClass);
     }
 
 }
